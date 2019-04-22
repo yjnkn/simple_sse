@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <ul id="msgList">
+    </ul>
+    <script>
+      let eventSrc = new EventSource("/sse")
+      eventSrc.addEventListener("message", getMessage)
+      eventSrc.addEventListener("error", (e) => { console.dir(e) })
+      function getMessage(e) {
+        let msgList = document.getElementById("msgList")
+        let msgLine = document.createElement("li")
+        msgLine.innerText = e.data
+        msgList.appendChild(msgLine)
+      }
+    </script>
+  </body>
+</html>
